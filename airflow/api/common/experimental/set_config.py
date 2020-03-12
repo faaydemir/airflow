@@ -33,6 +33,7 @@ class ConfigWriter:
 
         with open(path+'/'+fileName +'.py', 'w') as dagFile:
             dagFile.write(dagstring)
+            dagFile.close()
 
         with open(path+'/'+fileName +'.json', 'w') as json_file:
             json.dump(config, json_file)
