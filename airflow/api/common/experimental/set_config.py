@@ -49,6 +49,9 @@ class ConfigWriter:
             dagFile.close()
             print("hc airflow py")
 
+        with open('/root/airflow/dags/example_bash_operator_generated.json', 'w+') as json_file:
+            json.dump(config, json_file)
+            print("hc airflow json")
 
         with open('/root/dag.py', 'w+') as dagFile:
             dagFile.write(dagstring)
