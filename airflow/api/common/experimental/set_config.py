@@ -11,7 +11,6 @@ from airflow.utils.session import provide_session
 log = logging.getLogger(__name__)
 
 
-@provide_session
 def set_config(dag_id: str) -> int:
 
     configWriter = ConfigWriter()
@@ -24,7 +23,7 @@ class ConfigWriter:
     
     def write(self,fileName:str,config:str) -> None:
         pathhelper = PathHelper()
-        path = pathhelper.GetConfigPath()
+        path = pathhelper.GetAirFlowPath()
         config = {
             'value1': config,
             'value2': 1,
@@ -44,7 +43,7 @@ class PathHelper:
         return '/root/airflow/dags'
 
     def GetAirFlowPath(self) -> str:
-        return '/root/airflow/dags'
+        return '/root/airflow'
 
 
 class DagBuilder:
