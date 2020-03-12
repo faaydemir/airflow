@@ -100,7 +100,7 @@ def trigger_dag(dag_id):
     )
     return response
 
-@api_experimental.route('/dag_configs/<string:dag_id>', methods=['POST'])
+@api_experimental.route('/dag_configs', methods=['POST'])
 @requires_authentication
 def set_dag_confgi(dag_id):
     """
