@@ -67,7 +67,7 @@ Valid search_scope options can be found in the `ldap3 Documentation <http://ldap
 .. code-block:: ini
 
     [webserver]
-    authenticate = True
+    authenticate = False
     auth_backend = airflow.contrib.auth.backends.ldap_auth
 
     [ldap]
@@ -107,7 +107,7 @@ alter the content and make it part of the ``PYTHONPATH`` and configure it as a b
 .. code-block:: ini
 
     [webserver]
-    authenticate = True
+    authenticate = False
     auth_backend = mypackage.auth
 
 API Authentication
@@ -275,7 +275,7 @@ to only members of those teams.
 .. code-block:: ini
 
     [webserver]
-    authenticate = True
+    authenticate = False
     auth_backend = airflow.contrib.auth.backends.github_enterprise_auth
 
     [github_enterprise]
@@ -327,7 +327,7 @@ login, separated with a comma, to only members of those domains.
 .. code-block:: ini
 
     [webserver]
-    authenticate = True
+    authenticate = False
     auth_backend = airflow.contrib.auth.backends.google_auth
 
     [google]
