@@ -35,36 +35,43 @@
       {% endfor %}
     </div>
     <br>
+    <form method="post">
+      <input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
     <table class="table table-striped table-bordered">
       <tr>
         <th>schedule_interval</td>
-        <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="admin">
+        <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="">
           {{ dag.schedule_interval }}
         </input>
       </tr>
       <tr>
         <th>start_date</td>
-        <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="admin">
+        <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="">
         {{ dag.start_date }}
         </input>
       </tr>
       <tr>
         <th>end_date</td>
-        <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="admin">
+        <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="">
         {{ dag.end_date }}
        </input>
       </tr>
       <tr>
         <th>concurrency</td>
-          <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="admin">
+          <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="">
           {{ dag.concurrency }}
         </input>
       </tr>
       <tr>
         <th>default_args</td>
-          <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="admin">
+          <input class="form-control" id="schedule_interval" name="schedule_interval" placeholder="" required="" type="text" value="">
           <code>{{ dag.default_args }}</code>
         </input>
       </tr>
+      <tr>
+        <button type="submit" class="btn  btn-sm btn-primary">Save
+          <i class="fa fa-save"></i></button>
+      </tr>
+    </form>
     </table >
 {% endblock %}

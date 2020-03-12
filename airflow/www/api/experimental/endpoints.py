@@ -28,6 +28,7 @@ from airflow.api.common.experimental.get_dag_runs import get_dag_runs
 from airflow.api.common.experimental.get_lineage import get_lineage as get_lineage_api
 from airflow.api.common.experimental.get_task import get_task
 from airflow.api.common.experimental.get_task_instance import get_task_instance
+from airflow.api.common.experimental.set_config import set_config
 from airflow.exceptions import AirflowException
 from airflow.utils import timezone
 from airflow.utils.strings import to_boolean
@@ -99,6 +100,21 @@ def trigger_dag(dag_id):
     )
     return response
 
+@api_experimental.route('/dag_configs/<string:dag_id>', methods=['POST'])
+@requires_authentication
+def set_dag_confgi(dag_id):
+    """
+    Trigger a new dag run for a Dag with an execution date of now unless
+    specified in the data.
+    """
+    data = request.get_json(force=True)
+    set_config(dag_id)
+    response = jsonify(
+        message="",
+        execution_date="",
+        run_id=""
+    )
+    return response
 
 @csrf.exempt
 @api_experimental.route('/dags/<string:dag_id>', methods=['DELETE'])
