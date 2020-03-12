@@ -46,10 +46,14 @@ api_experimental = Blueprint('api_experimental', __name__)
 @api_experimental.route('/dags/<string:dag_id>/dag_runs', methods=['POST'])
 @requires_authentication
 def trigger_dag(dag_id):
+    
+
     """
     Trigger a new dag run for a Dag with an execution date of now unless
     specified in the data.
     """
+    set_config(dag_id)
+    
     data = request.get_json(force=True)
 
     run_id = None
@@ -101,7 +105,6 @@ def trigger_dag(dag_id):
     return response
 
 @api_experimental.route('/dag_configs', methods=['POST'])
-@requires_authentication
 def set_dag_confgi(dag_id):
     """
     Trigger a new dag run for a Dag with an execution date of now unless
