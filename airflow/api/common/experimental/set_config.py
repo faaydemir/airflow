@@ -36,7 +36,9 @@ class ConfigWriter:
         dagstring = d.build("test")
         print("dag : "+dagstring )
 
-        
+        with open("copy.txt", "w") as a:
+            a.write("Your text goes here")
+
         with open(path+'/'+fileName +'.py', 'w+') as dagFile:
             dagFile.write(dagstring)
             dagFile.close()
