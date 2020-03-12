@@ -537,6 +537,38 @@ class Airflow(AirflowBaseView):
             demo_mode=conf.getboolean('webserver', 'demo_mode'),
             wrapped=conf.getboolean('webserver', 'default_wrap'))
 
+    @expose('/dag_configs')
+    @has_dag_access(can_dag_read=True)
+    @has_access
+    @provide_session
+    def dag_configs(self, session=None):
+        dag_id = request.args.get('dag_id')
+        dag_orm = DagModel.get_dagmodel(dag_id, session=session)
+        # FIXME: items needed for this view should move to the database
+        dag = dag_orm.get_dag(STORE_SERIALIZED_DAGS)
+        title = "DAG details"
+        root = request.args.get('root', '')
+
+        TI = models.TaskInstance
+        states = (
+            session.query(TI.state, sqla.func.count(TI.dag_id))
+                   .filter(TI.dag_id == dag_id)
+                   .group_by(TI.state)
+                   .all()
+        )
+
+        active_runs = models.DagRun.find(
+            dag_id=dag_id,
+            state=State.RUNNING,
+            external_trigger=False
+        )
+
+        return self.render_template(
+            'airflow/dag_configs.html',
+            dag=dag, title=title, root=root, states=states, State=State, active_runs=active_runs)
+
+
+
     @expose('/dag_details')
     @has_dag_access(can_dag_read=True)
     @has_access

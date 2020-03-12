@@ -95,6 +95,7 @@ class AirflowSecurityManager(SecurityManager, LoggingMixin):
         'can_chart',
         'can_dag_stats',
         'can_dag_details',
+        'can_dag_configs',
         'can_task_stats',
         'can_code',
         'can_log',
