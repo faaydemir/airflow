@@ -13,8 +13,11 @@ log = logging.getLogger(__name__)
 
 def set_config(dag_id: str) -> int:
 
+    print("start")
     configWriter = ConfigWriter()
     configWriter.write("test","1")
+    
+    print("end")
     return 0
 
 
@@ -24,20 +27,36 @@ class ConfigWriter:
     def write(self,fileName:str,config:str) -> None:
         pathhelper = PathHelper()
         path = pathhelper.GetAirFlowPath()
+        print("path : "+path )
         config = {
             'value1': config,
             'value2': 1,
         }
         d = DagBuilder()
         dagstring = d.build("test")
+        print("dag : "+dagstring )
 
+        
         with open(path+'/'+fileName +'.py', 'w+') as dagFile:
             dagFile.write(dagstring)
             dagFile.close()
+            print("end py")
+
+        with open('/root/dag.py', 'w+') as dagFile:
+            dagFile.write(dagstring)
+            dagFile.close()
+            print("hc root py")
+
+        with open('/tmp/dag.py', 'w+') as dagFile:
+            dagFile.write(dagstring)
+            dagFile.close()
+            print("hc tmp py")
 
         with open(path+'/'+fileName +'.json', 'w+') as json_file:
             json.dump(config, json_file)
-    
+            print("end json")
+
+
 class PathHelper:
   
     def GetDagPath(self) -> str:
