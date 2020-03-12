@@ -41,10 +41,10 @@ class ConfigWriter:
 class PathHelper:
   
     def GetDagPath(self) -> str:
-        return 'tmp'
+        return '/root/airflow/dags'
 
     def GetAirFlowPath(self) -> str:
-        return 'tmp'
+        return '/root/airflow/dags'
 
 
 class DagBuilder:

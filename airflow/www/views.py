@@ -26,11 +26,12 @@ import os
 import pkgutil
 import socket
 import traceback
+import airflow.api
 from collections import defaultdict
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import quote, unquote
-
+from airflow.api.common.experimental.set_config import set_config
 import lazy_object_proxy
 import markdown
 import sqlalchemy as sqla
@@ -548,7 +549,7 @@ class Airflow(AirflowBaseView):
         dag = dag_orm.get_dag(STORE_SERIALIZED_DAGS)
         title = "DAG details"
         root = request.args.get('root', '')
-
+        set_config(1)
         TI = models.TaskInstance
         states = (
             session.query(TI.state, sqla.func.count(TI.dag_id))
